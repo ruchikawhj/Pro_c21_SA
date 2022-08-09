@@ -4,33 +4,37 @@ const Bodies = Matter.Bodies;
 
 let engine;
 let world;
-
-var ground;
-var left;
-var right;
-var top_wall;
+var w1,w2,w3,w4;
+var ball;
 
 function setup() {
   createCanvas(400,400);
   engine = Engine.create();
-  world = engine.world;
   
-  ground =new Ground(200,390,400,20);
-  right = new Ground(390,200,20,400);
-  left = new Ground(10,200,20,400);
-  top_wall = new Ground(200,10,400,20);
- 
+  world = engine.world;
   rectMode(CENTER);
   ellipseMode(RADIUS);
+
+  w1=new Ground(200,390,400,20);
+  w2=new Ground(10,200,20,400);
+  w3=new Ground(200,10,400,20);
+  w4=new Ground(390,200,20,400);
+
+  var options={restitution:0.8}
+
+  ball=Bodies.circle(200,200,20,options);
+  World.add(world,ball)
+  
 }
 
 function draw() 
 {
   background(51);
-  ground.show();
-  top_wall.show();
-  left.show();
-  right.show();
   Engine.update(engine);
+  w1.show();
+  w2.show();
+  w3.show();
+  w4.show();
+  ellipse(ball.position.x,ball.position.y,20)
 }
 
